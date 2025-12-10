@@ -1,0 +1,59 @@
+{
+  "name": "node-test-expect",
+  "version": "1.0.0",
+  "description": "Jest-like expect assertions for Node.js native test runner (node:test)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "node --import tsx --test ./test/basic.test.ts ./test/mocks.test.ts ./test/async.test.ts ./test/asymmetric.test.ts",
+    "test:coverage": "node --import tsx --test --experimental-test-coverage ./test/basic.test.ts ./test/mocks.test.ts ./test/async.test.ts ./test/asymmetric.test.ts",
+    "lint": "eslint src test",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist coverage",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "node",
+    "test",
+    "testing",
+    "expect",
+    "assertions",
+    "jest",
+    "node-test",
+    "native",
+    "typescript",
+    "matcher"
+  ],
+  "author": "fracabu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fracabu/node-test-expect.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fracabu/node-test-expect/issues"
+  },
+  "homepage": "https://github.com/fracabu/node-test-expect#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.6.0"
+  }
+}
