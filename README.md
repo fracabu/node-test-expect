@@ -135,3 +135,4 @@ expect(42).toEqual(expect.anything())
 ## License
 
 MIT
+
