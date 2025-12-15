@@ -1,32 +1,52 @@
-# node-test-expect
+<h1 align="center">node-test-expect</h1>
+<h3 align="center">Jest-like expect assertions for Node.js native test runner</h3>
 
-[![npm version](https://img.shields.io/npm/v/node-test-expect.svg)](https://www.npmjs.com/package/node-test-expect)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <em>Zero dependencies, full TypeScript support</em>
+</p>
 
-Jest-like `expect` assertions for Node.js native test runner (`node:test`).
+<p align="center">
+  <a href="https://www.npmjs.com/package/node-test-expect"><img src="https://img.shields.io/npm/v/node-test-expect.svg" alt="npm version" /></a>
+  <img src="https://img.shields.io/badge/Node.js-20%2B-green.svg" alt="Node.js" />
+  <img src="https://img.shields.io/badge/TypeScript-Ready-blue.svg" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
+</p>
 
-## Why?
+<p align="center">
+  :gb: <a href="#english">English</a> | :it: <a href="#italiano">Italiano</a>
+</p>
 
-Node.js v20+ includes a native test runner, but:
+---
+
+## Overview
+
+<!-- ![node-test-expect Overview](assets/test-expect-overview.png) -->
+
+---
+
+<a name="english"></a>
+## :gb: English
+
+### Why node-test-expect?
+
+Node.js v20+ has a native test runner, but:
 - Only provides basic `node:assert`
 - No `expect()` API
 - No Jest-like matchers
-- No mock assertion helpers
 
-**node-test-expect** fills this gap with:
-- **Zero dependencies** - uses `node:assert` internally
-- **Full TypeScript support** - written in TypeScript, ships with types
-- **Jest-compatible API** - familiar syntax for Jest users
-- **Native `node:test` mock integration** - works with `mock.fn()`
-- **Tiny bundle size** - ~23KB (unminified)
+**node-test-expect** provides:
+- Zero dependencies (uses `node:assert` internally)
+- Full TypeScript support
+- Jest-compatible API
+- Native `node:test` mock integration
 
-## Installation
+### Install
 
 ```bash
 npm install node-test-expect
 ```
 
-## Usage
+### Usage
 
 ```typescript
 import { expect } from 'node-test-expect'
@@ -36,97 +56,84 @@ test('basic assertions', () => {
   expect(1 + 1).toBe(2)
   expect({ a: 1 }).toEqual({ a: 1 })
   expect('hello').toContain('ell')
-  expect([1, 2, 3]).toHaveLength(3)
 })
 
 test('mock assertions', () => {
   const fn = mock.fn()
   fn('hello')
-
-  expect(fn).toHaveBeenCalled()
   expect(fn).toHaveBeenCalledWith('hello')
 })
 
-test('async assertions', async () => {
+test('async', async () => {
   await expect(Promise.resolve(42)).resolves.toBe(42)
-  await expect(Promise.reject(new Error('fail'))).rejects.toThrow('fail')
 })
 ```
 
-## Available Matchers
+### Available Matchers
 
-### Basic
-- `toBe(value)` - Strict equality (`Object.is`)
-- `toEqual(value)` - Deep equality
-- `toStrictEqual(value)` - Strict deep equality
+**Basic**: `toBe`, `toEqual`, `toStrictEqual`
+**Truthiness**: `toBeTruthy`, `toBeFalsy`, `toBeNull`, `toBeUndefined`
+**Numbers**: `toBeGreaterThan`, `toBeLessThan`, `toBeCloseTo`
+**Strings/Arrays**: `toContain`, `toMatch`, `toHaveLength`
+**Objects**: `toHaveProperty`, `toMatchObject`, `toBeInstanceOf`
+**Mocks**: `toHaveBeenCalled`, `toHaveBeenCalledWith`, `toHaveBeenCalledTimes`
 
-### Truthiness
-- `toBeTruthy()`
-- `toBeFalsy()`
-- `toBeNull()`
-- `toBeUndefined()`
-- `toBeDefined()`
-- `toBeNaN()`
+---
 
-### Numbers
-- `toBeGreaterThan(number)`
-- `toBeGreaterThanOrEqual(number)`
-- `toBeLessThan(number)`
-- `toBeLessThanOrEqual(number)`
-- `toBeCloseTo(number, precision?)`
+<a name="italiano"></a>
+## :it: Italiano
 
-### Strings & Arrays
-- `toContain(item)` - Check if string/array contains item
-- `toContainEqual(item)` - Check if array contains item (deep equality)
-- `toMatch(regexp)` - Check if string matches pattern
-- `toHaveLength(number)`
+### Perche node-test-expect?
 
-### Objects
-- `toHaveProperty(path, value?)` - Check property existence/value
-- `toMatchObject(object)` - Partial object match
-- `toBeInstanceOf(Class)`
+Node.js v20+ ha un test runner nativo, ma:
+- Fornisce solo `node:assert` base
+- Nessuna API `expect()`
+- Nessun matcher stile Jest
 
-### Errors
-- `toThrow(message?)` - Check if function throws
-- `toThrowError(message?)` - Alias for toThrow
+**node-test-expect** fornisce:
+- Zero dipendenze (usa `node:assert` internamente)
+- Supporto TypeScript completo
+- API compatibile Jest
+- Integrazione mock `node:test` nativa
 
-### Mocks (node:test)
-- `toHaveBeenCalled()`
-- `toHaveBeenCalledTimes(number)`
-- `toHaveBeenCalledWith(...args)`
-- `toHaveBeenLastCalledWith(...args)`
-- `toHaveBeenNthCalledWith(n, ...args)`
-- `toHaveReturned()`
-- `toHaveReturnedTimes(number)`
-- `toHaveReturnedWith(value)`
-- `toHaveLastReturnedWith(value)`
+### Installazione
 
-### Async
-- `resolves.toBe()` / `resolves.toEqual()` / etc.
-- `rejects.toThrow()` / `rejects.toBeInstanceOf()` / etc.
-
-### Negation
-All matchers support `.not`:
-
-```typescript
-expect(1).not.toBe(2)
-expect([]).not.toContain('x')
+```bash
+npm install node-test-expect
 ```
 
-## Asymmetric Matchers
+### Utilizzo
+
+```typescript
+import { expect } from 'node-test-expect'
+import { test, mock } from 'node:test'
+
+test('asserzioni base', () => {
+  expect(1 + 1).toBe(2)
+  expect({ a: 1 }).toEqual({ a: 1 })
+  expect('ciao').toContain('ia')
+})
+
+test('asserzioni mock', () => {
+  const fn = mock.fn()
+  fn('ciao')
+  expect(fn).toHaveBeenCalledWith('ciao')
+})
+```
+
+### Asymmetric Matchers
 
 ```typescript
 expect({ name: 'John', age: 30 }).toEqual({
   name: expect.any(String),
-  age: expect.any(Number),
+  age: expect.any(Number)
 })
 
 expect('hello world').toEqual(expect.stringContaining('world'))
 expect([1, 2, 3]).toEqual(expect.arrayContaining([1, 2]))
-expect({ a: 1, b: 2 }).toEqual(expect.objectContaining({ a: 1 }))
-expect('test@example.com').toEqual(expect.stringMatching(/@/))
-expect(42).toEqual(expect.anything())
 ```
+
+---
 
 ## Requirements
 
@@ -136,3 +143,10 @@ expect(42).toEqual(expect.anything())
 
 MIT
 
+---
+
+<p align="center">
+  <a href="https://github.com/fracabu">
+    <img src="https://img.shields.io/badge/Made_by-fracabu-8B5CF6?style=flat-square" alt="Made by fracabu" />
+  </a>
+</p>
