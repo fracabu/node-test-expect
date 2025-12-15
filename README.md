@@ -18,9 +18,19 @@
 
 ---
 
-## Overview
+## Features
 
-<!-- ![node-test-expect Overview](assets/test-expect-overview.png) -->
+<p align="center">
+  <img src="docs/assets/features.png" alt="node-test-expect Features" width="600" />
+</p>
+
+---
+
+## Matchers Overview
+
+<p align="center">
+  <img src="docs/assets/matchers-overview.png" alt="Comprehensive Matcher Overview" width="700" />
+</p>
 
 ---
 
