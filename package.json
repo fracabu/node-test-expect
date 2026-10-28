@@ -1,6 +1,6 @@
 {
   "name": "node-test-expect",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Jest-like expect assertions for Node.js native test runner (node:test)",
   "type": "module",
   "main": "./dist/index.js",
@@ -19,7 +19,6 @@
     "dev": "tsup --watch",
     "test": "node --import tsx --test ./test/basic.test.ts ./test/mocks.test.ts ./test/async.test.ts ./test/asymmetric.test.ts",
     "test:coverage": "node --import tsx --test --experimental-test-coverage ./test/basic.test.ts ./test/mocks.test.ts ./test/async.test.ts ./test/asymmetric.test.ts",
-    "lint": "eslint src test",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf dist coverage",
     "prepublishOnly": "npm run build && npm test"
