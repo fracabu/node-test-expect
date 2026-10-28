@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: npm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: 'npm'
@@ -31,10 +31,13 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish to npm with provenance
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Update npm (npm stage needs v12+)
+        run: npm install -g npm@12
+
+      # Trusted publishing (OIDC via id-token: write), no NPM_TOKEN needed.
+      # The release is staged: it goes public only after a 2FA approval on npmjs.com
+      - name: Stage publish to npm
+        run: npm stage publish --access public
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
